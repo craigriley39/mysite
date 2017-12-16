@@ -14,3 +14,10 @@
 
     padding-top: 6em;
 }
+
+.blog-entry-image{
+
+    margin-top:3em;
+    float:right;
+    border-radius:10px;
+}

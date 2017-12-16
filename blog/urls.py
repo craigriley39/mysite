@@ -9,4 +9,5 @@ urlpatterns = [
     path('/view/(?P<slug>[\w-]+)',views.view_post, name='view_post'),
     path('category/(?P<slug>[\w-]+)',views.view_category, name='view_category'),
 
+    path('search/', views.search, name='search'),
 ]

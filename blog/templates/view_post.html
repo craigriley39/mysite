@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block head_title %}Viewing category {{ category.title }}{% endblock %}
 {% block title %}{{ category.title }}{% endblock %}
-
+{% load markdownify %}
 {% block content %}
 <main role="main" class="container">
 
@@ -12,9 +12,9 @@
 
      <div class="blog-post">
                 <h2 class="blog-post-title">{{ post.title }}</h2>
-                <p class="blog-post-meta">{{ post.posted }} by <a href="#">{{ post.created_by }} </a></p>
+                <p class="blog-post-meta">{{ post.created }} by <a href="#">{{ post.created_by }} </a></p>
 
-                <p>{{ post.body }}</p>
+                <p>{{ post.body | markdownify }}</p>
 
           </div><!-- /.blog-post -->
 

@@ -47,6 +47,13 @@ def view_category(request, slug):
 
 
 def search(request):
-    search_string = request.POST.get('search')
+    import bleach
+    search_string = bleach.clean(request.POST.get('searchString'))
 
-    posts = Entry.objects.filter()
+    objects = Entry.objects.all()
+
+    from model_search import model_search
+    posts = model_search(search_string, objects, ['title','body'])
+
+    return render(request,'index.html',{'posts' : posts })
+

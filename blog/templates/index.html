@@ -3,7 +3,7 @@
 
 {% block content %}
 
-
+{% load markdownify %}
 
 
 <main role="main" class="container">
@@ -18,14 +18,17 @@
 
           <div class="blog-post">
 
+                {% if post.image %}
 
+                   <img class='blog-entry-image'  src="/{{ post.image }}" width="250" height="250">
+                {% endif %}
                 <a href="{% url 'blog:view_post' slug=post.slug %}"> <h2 class="blog-post-title">{{ post.title }}</h2></a>
-                <p class="blog-post-meta">{{ post.posted }} by <a href="#">{{ post.created_by }}</a>
+                <p class="blog-post-meta">{{ post.created }} by <a href="#">{{ post.created_by }}</a>
 
 
               </p>
 
-                <p>{{ post.body  | truncatewords:90}}</p>
+                <p>{{ post.body  | markdownify | truncatewords:90}}</p>
 
           </div><!-- /.blog-post -->
 
@@ -46,7 +49,7 @@
         {% endif %}
 
         <span class="current">
-            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
         </span>
 
         {% if posts.has_next %}
@@ -57,10 +60,6 @@
 </div>
 
 
-         <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-          </nav>
 
 
 
