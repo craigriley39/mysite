@@ -1,0 +1,43 @@
+<aside class="col-sm-3 ml-sm-auto blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About Me</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> This will be a little something about me I think</p>
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+          </div>
+
+          <div class="sidebar-module sidebar-module-inset">
+
+	          <h4>Categories</h4>
+			    {% if categories %}
+			        <ul>
+			        {% for category in categories %}
+			        	<h4
+			        <li><a href="{% url 'blog:view_category' slug=category.slug %}">{{ category.title }}</a></li>
+			        {% endfor %}
+			        </ul>
+			    {% else %}
+			        <p>There are no categories.</p>
+			    {% endif %}
+
+
+
+			    {% if user %}
+
+				    <h4>Tools  </h4>
+
+				    <ul>
+				    	<li><a  href="/admin/blog/blog/add/">Add Post</a></li>
+				    	<li><a  href="/admin/auth/user/add/">Add User</a></li>
+				    	<li><a href="/admin/blog/category/add/">Add Category</a></li>
+
+				    </ul>
+			   {% else %}
+			   		<p>Not Logged In</p>
+
+			    {% endif %}
+
+
+		</div>
+</aside>
