@@ -77,18 +77,22 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysite',
-        'USER': 'webuser',
-        'PASSWORD': 'daemon12',
-        'HOST': 'localhost',
-        'PORT': '',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mysite',
+#         'USER': 'webuser',
+#         'PASSWORD': 'daemon12',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#
+#     }
+# }
 
-    }
-}
-
+# Update database configuration with $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -127,14 +131,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/Users/criley/PycharmProjects/mysite/venv/mysite/static',
-]
-
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+#    '/Users/criley/PycharmProjects/mysite/venv/mysite/static',
+#]
+
+# STATIC_URL = '/static/'
 
 ## Settings for markdownify
 #MARKDOWNIFY_BLEACH = False
