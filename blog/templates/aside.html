@@ -1,20 +1,23 @@
-<aside class="col-sm-3 ml-sm-auto blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
+         {% load static %}
+          <div >
             <h4>About Me</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> This will be a little something about me I think</p>
+              <img style='float:right; border-radius:0em 0em 1em 1em;' width='100' heigh='100' src="{% static '/images/me.jpg' %}">
+            <p>Craig Riley <em>IT Leader. Old Unix Guy. Python Dude. Etc</em><br>
+				This site is basically an experiment in Django. I opted to use that framework over various others because well...I didn't already know Django and what's the fun in messing with something that you already know right?
+				I will attempt to jot down various items and tidbits i've learned along the way almost entirely for my own future reference. If anyone else finds anything useful then that is just a bonus!</p>
 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 
           </div>
 
-          <div class="sidebar-module sidebar-module-inset">
+          <div >
 
 	          <h4>Categories</h4>
 			    {% if categories %}
 			        <ul>
+						<li><a href="{% url 'blog:blog_index' %}">All</a></li>
 			        {% for category in categories %}
-			        	<h4
-			        <li><a href="{% url 'blog:view_category' slug=category.slug %}">{{ category.title }}</a></li>
+			        <li><a href="{% url 'blog:view_category' slug=category.slug %}">{{ category.name }}</a></li>
 			        {% endfor %}
 			        </ul>
 			    {% else %}
@@ -28,7 +31,7 @@
 				    <h4>Tools  </h4>
 
 				    <ul>
-				    	<li><a  href="/admin/blog/entry/">Add Post</a></li>
+				    	<li><a  href="/blog/add">Add Post</a></li>
 				    	<li><a  href="/admin/auth/user/add/">Add User</a></li>
 				    	<li><a href="/admin/blog/category/add/">Add Category</a></li>
 
@@ -40,4 +43,3 @@
 
 
 		</div>
-</aside>

@@ -5,14 +5,13 @@
 
 {% load markdownify %}
 
+ <main role="main" class="container">
 
-<main role="main" class="container">
       <div class="row">
 
         <div class="col-sm-8 blog-main">
 
-
-    {% if posts %}
+        {% if posts %}
 
         {% for post in posts %}
 
@@ -24,7 +23,6 @@
                 {% endif %}
                 <a href="{% url 'blog:view_post' slug=post.slug %}"> <h2 class="blog-post-title">{{ post.title }}</h2></a>
                 <p class="blog-post-meta">{{ post.created }} by <a href="#">{{ post.created_by }}</a>
-
 
               </p>
 
@@ -41,32 +39,44 @@
     {% endif %}
 
 
-            <div class="pagination">
-    <span class="step-links">
-        {% if posts.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ posts.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-        </span>
-
-        {% if posts.has_next %}
-            <a href="?page={{ posts.next_page_number }}">next</a>
-            <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
-
-
-
-
-
         </div><!-- /.blog-main -->
 
-        {% include 'aside.html' %}
-      </div>
-</main>
+        <aside class="col-sm-3 ml-sm-auto blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+               {% include 'aside.html' %}
+
+          </div>
+        </aside><!-- /.blog-sidebar -->
+
+
+
+      </div><!-- /.row -->
+     <div class="pagination">
+                <span class="step-links">
+                    {% if posts.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ posts.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                </span>
+
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}">next</a>
+                    <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+     <p>&nbsp;</p>
+     <p>&nbsp;</p>
+    </main><!-- /.container -->
+
+
+
+
+
+
+
 
 {% endblock %}
