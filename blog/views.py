@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Entry,Category
 
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -89,6 +90,7 @@ from .forms import EntryModelForm
     # created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     # objects = SearchManager(['title','body'])
 
+@login_required
 def add_entry(request):
     if request.method == 'GET':
         form = EntryModelForm()
