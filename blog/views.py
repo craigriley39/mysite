@@ -9,6 +9,8 @@ from .models import Entry,Category
 
 from django.contrib.auth.decorators import login_required
 
+from django.forms import ModelForm
+
 
 def index(request):
     posts = Entry.objects.all().order_by('created').reverse()
@@ -126,6 +128,16 @@ def entry_delete(request, slug, template_name='entry_confirm_delete.html'):
         entry.delete()
         return redirect('blog:blog_index')
     return render(request, template_name, {'entry':entry})
+
+
+@login_required
+def entry_update(request, slug, template_name='create_blog.html'):
+    entry = get_object_or_404(Entry, slug=slug)
+    form = EntryModelForm(request.POST or None, instance=entry)
+    if form.is_valid():
+        form.update()
+        return redirect('blog:blog_index')
+    return render(request, template_name, {'form':form})
 
 def error_404(request):
     data = {}

@@ -18,7 +18,9 @@
 
          <a href="{% url 'blog:entry_delete' slug=post.slug  %}" class="fa fa-trash" aria-hidden="true"></a>
             &nbsp; &nbsp;&nbsp;&nbsp;
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+
+         <a href="{% url 'blog:entry_update' slug=post.slug  %}" class="fa fa-pencil" aria-hidden="true"></a>
+
           </div><!-- /.blog-post -->
 
           <hr>

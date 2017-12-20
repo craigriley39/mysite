@@ -10,4 +10,4 @@ class EntryModelForm(forms.ModelForm):
         model = Entry
 
 
-        fields = ['title','body','image','category','slug','created_by']
+        fields = ['title','body','image','category','created_by']
