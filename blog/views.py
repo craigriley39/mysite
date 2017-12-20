@@ -116,6 +116,17 @@ def add_entry(request):
         'form': form,
     })
 
+# @login_required
+# def delete_entry(request):
+#
+@login_required
+def entry_delete(request, slug, template_name='entry_confirm_delete.html'):
+    entry = get_object_or_404(Entry, slug=slug)
+    if request.method=='POST':
+        entry.delete()
+        return redirect('blog:blog_index')
+    return render(request, template_name, {'entry':entry})
+
 def error_404(request):
     data = {}
     return render(request, '404.html', data)

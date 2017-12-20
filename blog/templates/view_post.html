@@ -16,6 +16,9 @@
 
                 <p>{{ post.body | markdownify }}</p>
 
+         <a href="{% url 'blog:entry_delete' slug=post.slug  %}" class="fa fa-trash" aria-hidden="true"></a>
+            &nbsp; &nbsp;&nbsp;&nbsp;
+            <i class="fa fa-pencil" aria-hidden="true"></i>
           </div><!-- /.blog-post -->
 
           <hr>
