@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'django.contrib.humanize',
     'font_awesome',
+    'order',
 ]
 
 MIDDLEWARE = [

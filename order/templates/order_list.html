@@ -1,0 +1,33 @@
+    <!--id = models.AutoField(primary_key=True)-->
+    <!--order_id = models.CharField(max_length=32)-->
+    <!--customer_id = models.ForeignKey(Customer,on_delete=models.CASCADE)-->
+    <!--order_status = models.CharField(choices=ORDER_STATUS, max_length=32)-->
+    <!--order_date = models.DateTimeField(auto_now_add=True)-->
+    <!--order_fulfill_date = models.DateTimeField(auto_now_add=True)-->
+    <!--created = models.DateTimeField(auto_now_add=True)-->
+    <!--created_by = models.ForeignKey(User,on_delete=models.CASCADE )-->
+
+{% load humanize %}
+
+    {% if orders %}
+
+    {% for order in orders %}
+
+
+    <p>{{ order.order_id }} </p>
+    <p>{{ order.customer_id }} </p>
+    <p>{{ order.order_status }} </p>
+    <p>{{ order.order_date }} </p>
+    <p>{{order.order_fulfill_date}}</p>
+    <p>{{ order.order_duration | naturaltime}}  </p>
+
+    {% endfor %}
+
+
+
+{% else %}
+
+    <h1>No Orders yet</h1>
+
+
+{% endif %}

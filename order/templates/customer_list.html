@@ -1,0 +1,28 @@
+
+
+{% if customers %}
+
+    {% for customer in customers %}
+
+id = models.AutoField(primary_key=True)
+    company_name = models.CharField(max_length=255)
+    customer_id = models.CharField(max_length=32)
+    customer_status = models.CharField(max_length=10,choices=CUSTOMER_STATUS,default='OPEN')
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    <p>{{ customer.company_name }}</p>
+    <p>{{ customer.customer_id }}</p>
+    <p>{{ customer.customer_status }}</p>
+    <p>{{ customer.created }} </p>
+
+    {% endfor %}
+
+
+
+{% else %}
+
+    <h1>No Customers Yet</h1>
+
+
+{% endif %}
