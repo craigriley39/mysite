@@ -12,11 +12,22 @@ class Category(models.Model):
         return '%s' % self.name
 
 
+
+def upload_image_to(instance, filename):
+    import os
+    from django.utils.timezone import now
+    filename_base, filename_ext = os.path.splitext(filename)
+    return 'images/%s%s' % (
+        now().strftime("%Y%m%d%H%M%S"),
+        filename_ext.lower(),
+    )
+
+
 class Entry(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
     #slug = models.SlugField(max_length=145,unique=True)
-    image = models.ImageField(null=True,blank=True)
+    image = models.ImageField(null=True,blank=True,upload_to=upload_image_to)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
