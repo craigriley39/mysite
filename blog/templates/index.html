@@ -20,7 +20,8 @@
 
                 {% if post.image %}
 
-                   <img class='blog-entry-image'  src="/{{ post.image }}" width="250" height="250">
+
+                   <img class='blog-entry-image'  src="https://s3.us-east-2.amazonaws.com/hashedvalue-assets/media/{{ post.image }}" width="250" height="250">
                 {% endif %}
                 <a href="{% url 'blog:view_post' pk=post.id %}"> <h2 class="blog-post-title">{{ post.title }}</h2></a>
                 <p class="blog-post-meta">{{ post.created | naturaltime }} by <a href="#">{{ post.created_by }}</a>
