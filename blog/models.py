@@ -17,7 +17,7 @@ class Entry(models.Model):
     body = models.TextField()
     #slug = models.SlugField(max_length=145,unique=True)
     image = models.ImageField(null=True,blank=True)
-    category = models.ForeignKey(Category,default='Blog',on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
