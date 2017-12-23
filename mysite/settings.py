@@ -214,3 +214,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIAFILES_LOCATION = 'images'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
+
+STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
