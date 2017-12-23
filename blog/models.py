@@ -6,7 +6,6 @@ from django.utils.text import slugify
 class Category(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=145,unique=True)
 
 
     def __str__(self):
@@ -14,12 +13,11 @@ class Category(models.Model):
 
 
 class Entry(models.Model):
-    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     body = models.TextField()
-    slug = models.SlugField(max_length=145,unique=True)
+    #slug = models.SlugField(max_length=145,unique=True)
     image = models.ImageField(null=True,blank=True,upload_to='static/images/')
-    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,default='Blog',on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -31,18 +29,29 @@ class Entry(models.Model):
     def __unicode__(self):
         return '%s' % self.title
 
-    def _get_unique_slug(self):
-        slug = slugify(self.title)
-        unique_slug = slug
-        num = 1
-        while Entry.objects.filter(slug=unique_slug).exists():
-            unique_slug = '{}-{}'.format(slug, num)
-            num += 1
-        return unique_slug
+    def get_absolute_url(self):
+        return reverse('view_post', kwargs={'pk' : self.pk})
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self._get_unique_slug()
+    # def _get_unique_slug(self):
+    #
+    #     #slug = slugify(self.title)
+    #     unique_slug = self
+    #     if Entry.objects.filter(slug=unique_slug).exists():
+    #         #raise ValueError('Entry with this title already exists')
+    #         print("Slug Exists")
+    #         slug = unique_slug
+    #     else:
+    #         slug = slugify(self.title)
+    #
+    #     #while Entry.objects.filter(slug=unique_slug).exists():
+    #     #    unique_slug = '{}-{}'.format(slug, num)
+    #     #    num += 1
+    #     return slug
 
-        super().save()
+    # def save(self, *args, **kwargs):
+    #     print("This is the models idea of what the slug is: ",self)
+    #     if not self.slug:
+    #         self.slug = self._get_unique_slug()
+    #
+    #     super().save()
 

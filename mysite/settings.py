@@ -77,18 +77,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 DATABASES = {
-            'default': {
-                        'ENGINE': 'django.db.backends.mysql',
-                        'NAME': 'mysite',
-                        'USER': 'webuser',
-                        'PASSWORD': 'daemon12',
-                        'HOST': 'localhost',
-                        'PORT': '',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mysite', #get_env_variable('DATABASE_NAME'),
+        'USER': 'webuser', #get_env_variable('DATABASE_USER'),
+        'PASSWORD': 'daemon12', #get_env_variable('DATABASE_PASSWORD'),
+        'HOST': '',
+        'PORT': '',
+    }
+}
 
-                        }
-            }
+#DATABASES = {
+#            'default': {
+#                        'ENGINE': 'django.db.backends.mysql',
+#                        'NAME': 'mysite',
+#                        'USER': 'webuser',
+#                        'PASSWORD': 'daemon12',
+#                        'HOST': 'localhost',
+#                        'PORT': '',
+#
+#                        }
+#            }
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

@@ -17,7 +17,7 @@
 			        <ul>
 						<li><a href="{% url 'blog:blog_index' %}">All</a></li>
 			        {% for category in categories %}
-			        <li><a href="{% url 'blog:view_category' slug=category.slug %}">{{ category.name }}</a></li>
+			        <li><a href="{% url 'blog:view_category' pk=category.id  %}">{{ category.name }}</a></li>
 			        {% endfor %}
 			        </ul>
 			    {% else %}

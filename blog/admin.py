@@ -12,8 +12,7 @@ class EntryAdmin(admin.ModelAdmin):
     #     return tmp
 
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
-
+    exclude = ['posted']
 # Regisger the models to the admin
 admin.site.register(Entry,EntryAdmin)
 admin.site.register(Category, CategoryAdmin)

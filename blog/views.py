@@ -10,7 +10,7 @@ from .models import Entry,Category
 from django.contrib.auth.decorators import login_required
 
 from django.forms import ModelForm
-
+from django.views.generic.edit import UpdateView,CreateView
 
 def index(request):
     posts = Entry.objects.all().order_by('created').reverse()
@@ -32,14 +32,14 @@ def index(request):
 
     return render(request, 'index.html', {'posts': posts,'categories': categories})
 
-def view_post(request, slug):
-    post = get_object_or_404(Entry, slug=slug)
+def view_post(request, pk):
+    post = get_object_or_404(Entry, pk=pk)
 
     return render(request, 'view_post.html', {'post': post})
 
 
-def view_category(request, slug):
-    category = get_object_or_404(Category, slug=slug)
+def view_category(request, pk):
+    category = get_object_or_404(Category)
 
     posts =  Entry.objects.filter(category=category)
 
@@ -81,6 +81,7 @@ def search(request):
 
 # myblog/views.py
 from .forms import EntryModelForm
+from django.urls import reverse_lazy
 
     # id = models.AutoField(primary_key=True)
     # title = models.CharField(max_length=255)
@@ -91,6 +92,21 @@ from .forms import EntryModelForm
     # created = models.DateTimeField(auto_now_add=True)
     # created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     # objects = SearchManager(['title','body'])
+
+
+class AddEntry(CreateView):
+    model = Entry
+    fields = ['title','body','image','category','created_by']
+    success_url = '/blog'
+    template_name = 'create_blog.html'
+
+class UpdateEntry(UpdateView):
+    model = Entry
+    fields = ['title', 'body', 'image', 'category', 'created_by']
+    success_url = 'blog_index'
+    template_name = 'create_blog.html'
+
+
 
 @login_required
 def add_entry(request):
@@ -107,7 +123,7 @@ def add_entry(request):
             body = form.cleaned_data['body']
             image = form.cleaned_data['image']
             category = form.cleaned_data['category']
-            slug = form.cleaned_data['slug']
+            #slug = form.cleaned_data['slug']
             #created = form.cleaned_data['created']
             created_by = form.cleaned_data['created_by']
             post = Entry.objects.create(title=title,body=body,image=image,category=category,created_by=created_by)
@@ -118,25 +134,35 @@ def add_entry(request):
         'form': form,
     })
 
-# @login_required
-# def delete_entry(request):
 #
+
 @login_required
-def entry_delete(request, slug, template_name='entry_confirm_delete.html'):
-    entry = get_object_or_404(Entry, slug=slug)
+def entry_delete(request, pk, template_name='entry_confirm_delete.html'):
+    entry = get_object_or_404(Entry, pk=pk)
     if request.method=='POST':
         entry.delete()
         return redirect('blog:blog_index')
     return render(request, template_name, {'entry':entry})
 
 
+
 @login_required
-def entry_update(request, slug, template_name='create_blog.html'):
-    entry = get_object_or_404(Entry, slug=slug)
-    form = EntryModelForm(request.POST or None, instance=entry)
-    if form.is_valid():
-        form.update()
-        return redirect('blog:blog_index')
+def entry_update(request, pk, template_name='create_blog.html'):
+    #entry = get_object_or_404(Entry, pk=pk)
+    entry = Entry.objects.get(id=pk)
+    if pk:
+
+        entry.id = pk
+        entry.title = request.POST.get('title')
+        entry.body = request.POST.get('body')
+        entry.category = request.POST.get('category')
+        entry.save()
+
+        return redirect('/blog')
+
+    else:
+        form = EntryModelForm(request.POST or None,instance=entry)
+
     return render(request, template_name, {'form':form})
 
 def error_404(request):
