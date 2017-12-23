@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
      'markdownify',
     'blog',
     'django.contrib.humanize',
@@ -135,14 +136,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
-#STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-#    '/Users/criley/PycharmProjects/mysite/venv/mysite/static',
-#]
 
 # STATIC_URL = '/static/'
 # Static files (CSS, JavaScript, Images)
@@ -158,6 +152,9 @@ STATICFILES_DIRS = (
 )
 
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
 ## Settings for markdownify
 #MARKDOWNIFY_BLEACH = False
@@ -195,3 +192,25 @@ LOGIN_URL='/admin/login'
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+}
+
+AWS_STORAGE_BUCKET_NAME = 'hashedvalue-assets'
+AWS_S3_REGION_NAME = 'us-east-2'  # e.g. us-east-2
+AWS_ACCESS_KEY_ID = 'AKIAJNIKOCGTJ43JI4VA'
+AWS_SECRET_ACCESS_KEY = 'kpDlD4Gs9mbHYgrcawWxaTwM2EbiFk32UzcSMjrQ'
+
+# Tell django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# Tell the staticfiles app to use S3Boto3 storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+MEDIAFILES_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
