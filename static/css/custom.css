@@ -28,3 +28,9 @@
 
     background:url('/static/images/404.png');
 }
+
+.media-body {
+
+    padding-right: 2em;
+
+}
