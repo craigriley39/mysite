@@ -23,7 +23,7 @@ print("base dir path", BASE_DIR)
 SECRET_KEY = '^scvu#%p9r8dnbwzt=2i4w-&a@wv675-5ogm3l!)x^^9$0#x&m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =True
+#DEBUG =True
 
 ALLOWED_HOSTS = ['*']
 
