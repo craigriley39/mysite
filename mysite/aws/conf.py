@@ -6,6 +6,11 @@ AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
 AWS_QUERYSTRING_AUTH = True
 
+WS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = True
+
+
 DEFAULT_FILE_STORAGE = 'mysite.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'mysite.aws.utils.StaticRootS3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'hashedvalue-assets'
