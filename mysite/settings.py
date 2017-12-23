@@ -201,8 +201,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 AWS_STORAGE_BUCKET_NAME = 'hashedvalue-assets'
 AWS_S3_REGION_NAME = 'us-east-2'  # e.g. us-east-2
-AWS_ACCESS_KEY_ID = 'AKIAIDLXMEMGAGT5HDBQ'
-AWS_SECRET_ACCESS_KEY = 'DUnu7ovuxyAvaWCmx6lhT/HU18Aln5/0aj78pXhz'
+AWS_ACCESS_KEY_ID = 'AKIAIDXU33RWKGU7ZFAQ'
+AWS_SECRET_ACCESS_KEY = 'VgBXyIaVDmRlbZxd+4wXSZmw2uRAVLu7SFJAAC2L'
 
 # Tell django-storages the domain to use to refer to static files.
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
