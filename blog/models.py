@@ -54,12 +54,14 @@ class Entry(models.Model):
     def save(self,*args, **kwargs):
         # Opening the uploaded image
         if self.image:
+
+
             im = Image.open(self.image)
 
             output = BytesIO()
 
             # Resize/modify the image
-            #im = im.resize((750, 300))
+            im = im.resize((750, 300),Image.NEAREST)
 
             # after modifications, save it to the output
             im.save(output, format='JPEG', quality=40)
