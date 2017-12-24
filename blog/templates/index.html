@@ -12,12 +12,54 @@
 <!-- Page Content -->
     <div class="container">
 
-      <div class="row">
+
+                <!-- Sidebar Widgets Column -->
+        <div class="col-sm-4 float-right">
+
+
+<!-- Side Widget -->
+            <div style="float:right;">
+          <div class="card my-4">
+            <h5 class="card-header">About Me</h5>
+            <div class="card-body">
+                 <img style='float:right; border-radius:1em;' width='100' heigh='100' src="https://s3.us-east-2.amazonaws.com/hashedvalue-assets/static/images/me.jpg">
+            <p>Craig Riley <em>IT Leader. Old Unix Guy. Python Dude. Etc</em><br><br>
+				This site is basically an experiment in Django. I opted to use that framework over various others because well...I didn't already know Django and what's the fun in messing with something that you already know right?
+				I will attempt to jot down various items and tidbits i've learned along the way almost entirely for my own future reference. If anyone else finds anything useful then that is just a bonus!</p>
+
+
+            </div>
+          </div>
+
+        </div>
+
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                        {% for category in categories %}
+                    <li>
+                        <a href="{% url 'blog:view_category' pk=category.id  %}">{{ category }}</a>
+                    </li>
+                       {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+</div>
 {% if posts %}
 
         {% for post in posts %}
         <!-- Blog Entries Column -->
-        <div class="col-md-6">
+        <div class="col-sm-8">
 
           <h1 class="my-4">Hashedvalue.com<br>
             <small>-Just some rambling thoughts</small>
@@ -33,16 +75,19 @@
             </div>
             <div class="card-footer text-muted">
              Posted {{ post.created | naturaltime }} by {{ post.created_by }}
-              <a href="#">Start Bootstrap</a>
             </div>
+
           </div>
+        </div>
 
 
 
    {% endfor %}
+
     {% else %}
       <p>There are no posts.</p>
    {% endif %}
+                  </div>
   <!-- Pagination -->
           <ul class="pagination justify-content-center mb-4">
             <li class="page-item">
@@ -53,40 +98,7 @@
             </li>
           </ul>
       </div>
-      </div>
-    </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
 
-
-<!-- Side Widget -->
-            <div style="float:right">
-          <div class="card my-4">
-            <h5 class="card-header">About Me</h5>
-            <div class="card-body">
-                 <img style='float:right; border-radius:1em;' width='100' heigh='100' src="https://s3.us-east-2.amazonaws.com/hashedvalue-assets/static/images/me.jpg">
-            <p>Craig Riley <em>IT Leader. Old Unix Guy. Python Dude. Etc</em><br><br>
-				This site is basically an experiment in Django. I opted to use that framework over various others because well...I didn't already know Django and what's the fun in messing with something that you already know right?
-				I will attempt to jot down various items and tidbits i've learned along the way almost entirely for my own future reference. If anyone else finds anything useful then that is just a bonus!</p>
-
-
-            </div>
-          </div>
-          <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Categories</h5>
-            {% for category in categories %}
-
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="{% url 'blog:view_category' pk=category.id  %}">{{ category }}</a>
-                    </li>
-                  </ul>
-                </div>
-            {% endfor %}
 
 
 
@@ -96,19 +108,7 @@
         </div>
 
       </div>
-              </div>
-      <!-- /.row -->
-
     </div>
-    <!-- /.container -->
-
-
-
-
-
-
-
-
 
 
 
