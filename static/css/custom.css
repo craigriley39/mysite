@@ -28,9 +28,13 @@
 
     background:url('/static/images/404.png');
 }
+.panel {
 
-.media img {
+    width:60%;
+}
 
-    padding-right: 2em;
+.main {
+
+    width: 60%;
 
 }
