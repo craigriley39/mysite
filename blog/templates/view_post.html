@@ -2,33 +2,33 @@
 {% block head_title %}Viewing category {{ category.title }}{% endblock %}
 {% block title %}{{ category.title }}{% endblock %}
 {% load markdownify %}
+{% load humanize %}
 {% block content %}
+
 <main role="main" class="container">
 
-      <div class="row">
 
-        <div class="col-sm-8 blog-main">
+
     {% if post %}
 
-     <div class="blog-post">
-                <h2 class="blog-post-title">{{ post.title }}</h2>
-                <p class="blog-post-meta">{{ post.created }} by <a href="#">{{ post.created_by }} </a></p>
 
-                <p>{{ post.body | markdownify }}</p>
-
-         <!--<a href="{% url 'blog:entry_delete' pk=post.id  %}" class="fa fa-trash" aria-hidden="true"></a>-->
-            <!--&nbsp; &nbsp;&nbsp;&nbsp;-->
-
-         <!--<a href="{% url 'blog:entry_update' pk=post.id %}" class="fa fa-pencil" aria-hidden="true"></a>-->
-
-          </div><!-- /.blog-post -->
-
-          <hr>
+             <div class="col-sm-12">
 
 
-      </div>
+          <!-- Blog Post -->
+          <div class="card mb-4">
+            <img class="card-img-top" src="https://s3.us-east-2.amazonaws.com/hashedvalue-assets/media/{{ post.image }}" width="750" height="300">
+            <div class="card-body">
+              <h1 class="card-title">{{ post.title }}</h1>
+              <p class="card-text">{{ post.body  | markdownify  }} </p>
+            </div>
+            <div class="card-footer text-muted">
+             Posted {{ post.created | naturaltime }} by {{ post.created_by }}
+            </div>
 
-     </div>
+          </div>
+        </div>
+        </div>
      </main>
 
 

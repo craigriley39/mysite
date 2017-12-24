@@ -71,7 +71,7 @@
             <div class="card-body">
               <h2 class="card-title">{{ post.title }}</h2>
               <p class="card-text">{{ post.body  | markdownify | truncatewords:90}}</p>
-              <a href="{% static 'view_post' slug=post.slug %}" class="btn btn-primary">Read More &rarr;</a>
+              <a href="{% url 'blog:view_post' pk=post.id %}" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
              Posted {{ post.created | naturaltime }} by {{ post.created_by }}
