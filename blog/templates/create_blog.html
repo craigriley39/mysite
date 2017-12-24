@@ -14,7 +14,7 @@
 
         <div class="col-sm-8 blog-main">
 
-           <form action="/blog/add/" method="POST">
+           <form action="/blog/add/" enctype="multipart/form-data" method="POST">
                     {%csrf_token%}
                     {% for error in form.non_field_errors %}
                     <div class="form-group has-errors text-danger small">

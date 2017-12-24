@@ -107,7 +107,6 @@ class UpdateEntry(UpdateView):
     template_name = 'create_blog.html'
 
 
-
 @login_required
 def add_entry(request):
     if request.method == 'GET':
@@ -121,11 +120,12 @@ def add_entry(request):
 
             title = form.cleaned_data['title']
             body = form.cleaned_data['body']
-            image = form.cleaned_data['image']
+            image =  request.FILES['image']  #form.cleaned_data['image']
             category = form.cleaned_data['category']
             #slug = form.cleaned_data['slug']
             #created = form.cleaned_data['created']
             created_by = form.cleaned_data['created_by']
+            print("Value of image is: ",image)
             post = Entry.objects.create(title=title,body=body,image=image,category=category,created_by=created_by)
             #return HttpResponseRedirect(reverse(', kwargs={'post_id': post.id}))
             return redirect('/blog')

@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 
 from django.utils.text import slugify
 
+
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+
+
+
 class Category(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
@@ -43,6 +51,27 @@ class Entry(models.Model):
     def get_absolute_url(self):
         return reverse('view_post', kwargs={'pk' : self.pk})
 
+    def save(self,*args, **kwargs):
+        # Opening the uploaded image
+        print("Value of self is ",self)
+        print(self.image)
+        if self.image:
+            im = Image.open(self.image)
+
+            output = BytesIO()
+
+            # Resize/modify the image
+            im = im.resize((750, 300))
+
+            # after modifications, save it to the output
+            im.save(output, format='JPEG', quality=40)
+            output.seek(0)
+
+        # change the imagefield value to be the newley modifed image value
+            self.image = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.image.name.split('.')[0], 'image/jpeg',
+                                        sys.getsizeof(output), None)
+
+        super(Entry, self).save(*args, **kwargs)
     # def _get_unique_slug(self):
     #
     #     #slug = slugify(self.title)
