@@ -1,45 +1,43 @@
          {% load static %}
-          <div >
-            <h4>About Me</h4>
-              <img style='float:right; border-radius:1em;' width='100' heigh='100' src="https://s3.us-east-2.amazonaws.com/hashedvalue-assets/static/images/me.jpg">
+          <!-- Sidebar Widgets Column -->
+          <div class="col-sm-4 float-right">
+         <!-- Side Widget -->
+            <div style="float:right;">
+          <div class="card my-4">
+            <h5 class="card-header">About Me</h5>
+            <div class="card-body">
+                 <img style='float:right; border-radius:1em;' width='100' heigh='100' src="https://s3.us-east-2.amazonaws.com/hashedvalue-assets/static/images/me.jpg">
             <p>Craig Riley <em>IT Leader. Old Unix Guy. Python Dude. Etc</em><br><br>
-				This site is basically an experiment in Django. I opted to use that framework over various others because well...I didn't already know Django and what's the fun in messing with something that you already know right?
-				I will attempt to jot down various items and tidbits i've learned along the way almost entirely for my own future reference. If anyone else finds anything useful then that is just a bonus!</p>
+                This site is an experiment in Django and Heroku. If you happened to stumble upon this site and find anything here useful you are more than welcome to it.</p>
 
+                <br>
+                <a href="{% url 'blog:resume' %}">Resume</a>
 
-
+            </div>
           </div>
 
-          <div >
+        </div>
 
-	          <h4>Categories</h4>
-			    {% if categories %}
-			        <ul>
-						<li><a href="{% url 'blog:blog_index' %}">All</a></li>
-			        {% for category in categories %}
-			        <li><a href="{% url 'blog:view_category' pk=category.id  %}">{{ category.name }}</a></li>
-			        {% endfor %}
-			        </ul>
-			    {% else %}
-			        <p>There are no categories.</p>
-			    {% endif %}
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
 
 
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                        {% for category in categories %}
+                    <li>
+                        <a href="{% url 'blog:view_category' pk=category.id  %}">{{ category }}</a>
+                    </li>
+                       {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
-			    {% if user %}
 
-				    <h4>Tools  </h4>
+</div>
 
-				    <ul>
-				    	<li><a  href="/blog/add">Add Post</a></li>
-				    	<li><a  href="/admin/auth/user/add/">Add User</a></li>
-				    	<li><a href="/admin/blog/category/add/">Add Category</a></li>
-
-				    </ul>
-			   {% else %}
-			   		<p>Not Logged In</p>
-
-			    {% endif %}
-
-
-		</div>

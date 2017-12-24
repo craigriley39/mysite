@@ -9,10 +9,11 @@
 
 
  <main role="main" class="container">
-
+ <!-- Sidebar Widgets Column -->
+     {% include 'aside.html' %}
       <div class="row">
 
-        <div class="col-sm-8 blog-main">
+        <div class="col-sm-12 blog-main">
 
            <form action="/blog/add/" enctype="multipart/form-data" method="POST">
                     {%csrf_token%}
@@ -36,12 +37,6 @@
 
         </div><!-- /.blog-main -->
 
-        <aside class="col-sm-3 ml-sm-auto blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-               {% include 'aside.html' %}
-
-          </div>
-        </aside><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
 

@@ -34,12 +34,13 @@ def index(request):
 
 def view_post(request, pk):
     post = get_object_or_404(Entry, pk=pk)
+    categories = Category.objects.all()
 
-    return render(request, 'view_post.html', {'post': post})
+    return render(request, 'view_post.html', {'post': post,'categories' : categories})
 
 
 def view_category(request, pk):
-    category = get_object_or_404(Category)
+    category = get_object_or_404(Category, pk=pk)
 
     posts =  Entry.objects.filter(category=category)
 
@@ -72,8 +73,8 @@ def search(request):
 
     from model_search import model_search
     posts = model_search(search_string, objects, ['title','body'])
-
-    return render(request,'index.html',{'posts' : posts })
+    categories = Category.objects.all();
+    return render(request,'index.html',{'posts' : posts ,'categories' : categories})
 
 
 
@@ -130,8 +131,9 @@ def add_entry(request):
             #return HttpResponseRedirect(reverse(', kwargs={'post_id': post.id}))
             return redirect('/blog')
 
+    categories = Category.objects.all()
     return render(request, 'create_blog.html', {
-        'form': form,
+        'form': form,'categories' : categories
     })
 
 #

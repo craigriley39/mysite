@@ -127,6 +127,10 @@ p {
 .sidebar-wrapper .profile {
   margin-bottom: 15px;
 }
+.profile img {
+
+    border-radius:50px;
+}
 .sidebar-wrapper .contact-list .fa {
   margin-right: 5px;
   font-size: 18px;
