@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-
+from django.views.generic import TemplateView
 
 app_name = 'blog'
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('/edit/(?P<pk>\d+)', views.entry_update,name='entry_update'),
     #path('/edit/(?P<pk>\d+)', views.UpdateEntry.as_view(), name='entry_update'),
     path('search/', views.search, name='search'),
-    path('add/', views.add_entry, name='add_entry')
+    path('add/', views.add_entry, name='add_entry'),
+    path('resume/', views.display_resume, name='resume'),
     #path('add/', views.AddEntry.as_view(), name='add_entry'),
 ]

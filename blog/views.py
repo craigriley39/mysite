@@ -174,3 +174,6 @@ def error_500(request):
     data = {}
     return render(request, '500.html', data)
 
+
+def display_resume(request):
+    return render(request,'resume.html')
