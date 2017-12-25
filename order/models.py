@@ -197,7 +197,7 @@ class Location(models.Model):
 
 class Order(models.Model):
     order_id = models.CharField(max_length=32)
-    order_sold_in = models.ForeignKey(Location)
+    order_sold_in = models.ForeignKey(Location,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -222,7 +222,7 @@ class Product(models.Model):
 
     product_name = models.CharField(max_length=64)
     product_id = models.CharField(max_length=32)
-    order_id = models.ForeignKey(Order)
+    order_id = models.ForeignKey(Order,on_delete=models.CASCADE)
     cost = models.FloatField()
     sell_for_amount = models.FloatField(max_length=10)
     created = models.DateTimeField(auto_now_add=True)
