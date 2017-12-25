@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer,Order,Product
+from .models import Customer,Order,Product,Location
 # Register your models here.
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -36,6 +36,18 @@ class ProductAdmin(admin.ModelAdmin):
         return tmp
 
 
+class LocationAdmin(admin.ModelAdmin):
+    exclude = ['created','id']
+
+
+    def get_readonly_fields(self, request, obj=None):
+        # we need to cast the readonly_fields to a list and append and then return that.
+        tmp = list(self.readonly_fields)
+        tmp.append('location_id')
+        return tmp
+
+
 admin.site.register(Customer,CustomerAdmin)
 admin.site.register(Order,OrderAdmin)
 admin.site.register(Product,ProductAdmin)
+admin.site.register(Location,LocationAdmin)
