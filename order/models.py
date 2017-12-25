@@ -168,36 +168,41 @@ class TaxRateByZip(models.Model):
 
 # an order contains one or more products
 # each prodcut has a category of service
+class Location(models.Model):
+    location_id = models.CharField(max_length=32)
+    location_city = models.CharField(max_length=120)
+    location_state = models.CharField(max_length=32)
+    location_country = models.CharField(max_length=32)
+    location_local_tax_rate = models.FloatField(max_length=8)
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s' % self.location_id
+
+
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            try:
+                last_id = Location.objects.latest('created')
+                next_id = last_id.id + 1
+            except ObjectDoesNotExist:
+                print('No Locations yet')
+                next_id = 1
+
+            self.location_id = 'LOC' + str(next_id).zfill(6)
+
+            super(Location, self).save(*args, **kwargs)
 
 class Order(models.Model):
-    ORDER_STATUS = [
-        ('OPEN', 'OPEN'),
-        ('HOLD','HOLD'),
-        ('CLOSED', 'CLOSED')
-        ]
-    id = models.AutoField(primary_key=True)
     order_id = models.CharField(max_length=32)
-    customer_id = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    order_status = models.CharField(choices=ORDER_STATUS, max_length=32)
-    order_date = models.DateTimeField(default=datetime.datetime.now())
-    order_fulfill_date = models.DateTimeField(datetime.datetime.now())
+    order_sold_in = models.ForeignKey(Location)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User,on_delete=models.CASCADE )
-
-
-    @property
-    def order_duration(self):
-        order_duration = self.order_date - self.order_fulfill_date
-        return order_duration
-    # This model should have a few propertys defined
-    # total order amount
-    # delta between order_date and order_fulfill_date = order_duration
-    # order fufil date
-    # combined tax rate, city state taxes , etc
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s' % self.order_id
-
 
 
     def save(self, *args, **kwargs):
@@ -209,62 +214,17 @@ class Order(models.Model):
                 print('No Orders yet')
                 next_id = 1
 
-
             self.order_id = 'ORD' + str(next_id).zfill(6)
 
-            super(Order, self).save(*args, **kwargs)
-
-
-
-
-
-
-class Category(models.Model):
-
-
-    TRANSACTION_TYPES = [
-        ('SHIPMENT', 'SHIPMENT'),
-        ('HOMESALE','HOMESALE'),
-        ('SOMETHING', 'Something else'),
-    ]
-    category_group_id = models.CharField(max_length=32)
-    category_group_name = models.CharField(max_length=32)
-    transaction_type = models.CharField(max_length=12,choices=TRANSACTION_TYPES)
-    created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return '%s' % self.category_group_name
-
-
-    def __unicode__(self):
-        return '%s' % self.category_group_id
-
-
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            try:
-                last_id = Category.objects.latest('created')
-                next_id = last_id.id + 1
-            except ObjectDoesNotExist:
-                print('No Categories yet')
-                next_id = 1
-
-            self.product_id = 'CAT' + str(next_id).zfill(6)
-
-            super(Category, self).save(*args, **kwargs)
-
+            super(Product, self).save(*args, **kwargs)
 
 class Product(models.Model):
 
-    category_group_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=64)
-    product_id = models.CharField(max_length=32,primary_key=True)
+    product_id = models.CharField(max_length=32)
+    order_id = models.ForeignKey(Order)
     cost = models.FloatField()
     sell_for_amount = models.FloatField(max_length=10)
-    est_tax_amount = models.FloatField(max_length=10)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -286,3 +246,5 @@ class Product(models.Model):
 
     def __str__(self):
         return '%s' % self.product_name
+
+

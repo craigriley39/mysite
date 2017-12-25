@@ -1,0 +1,30 @@
+{% if products %}
+
+    {% for product in products %}
+
+    <!--category_group_id = models.ForeignKey(Category, on_delete=models.CASCADE)-->
+    <!--product_name = models.CharField(max_length=64)-->
+    <!--product_id = models.CharField(max_length=32,primary_key=True)-->
+    <!--cost = models.FloatField()-->
+    <!--sell_for_amount = models.FloatField(max_length=10)-->
+    <!--est_tax_amount = models.FloatField(max_length=10)-->
+    <!--created = models.DateTimeField(auto_now_add=True)-->
+    <!--created_by = models.ForeignKey(User, on_delete=models.CASCADE)-->
+
+<p>{{ product.category_group_id }}</p>
+<p>{{product.product_name }}</p>
+<p>{{ product.cost }}</p>
+<p>{{ product.total_sell_amount }}</p>
+<p>{{ product.sell_for_amount }}</p>
+<p>{{ product.est_tax_amount }}</p>
+
+    {% endfor %}
+
+
+
+{% else %}
+
+    <h1>No Customers Yet</h1>
+
+
+{% endif %}
