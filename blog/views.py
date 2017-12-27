@@ -111,7 +111,8 @@ class UpdateEntry(UpdateView):
 @login_required
 def add_entry(request):
     if request.method == 'GET':
-        form = EntryModelForm()
+        user = request.user
+        form = EntryModelForm({'user' : user})
     else:
         # A POST request: Handle Form Upload
         # Bind data from request.POST into a PostForm

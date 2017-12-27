@@ -8,7 +8,14 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <![endif]-->
+    <script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
 </head>
 <main class="container">
     <div class="wrapper">
@@ -23,7 +30,7 @@
                 <ul class="list-unstyled contact-list">
                     <li class="email"><i class="fa fa-envelope"></i><a href="mailto: craigriley39@gmail.com">craigriley39@gmail.com</a></li>
                     <li class="linkedin"><i class="fa fa-linkedin"></i><a href="www.linkedin.com/in/craig-riley-b632134" target="_blank">Linked In</a></li>
-                    <li class="github"><i class="fa fa-github"></i><a href="#" target="_blank">github.com/craigriley39</a></li>
+                    <li class="github"><i class="fa fa-github"></i><a href="https://github.com/craigriley39" target="_blank">github.com/craigriley39</a></li>
                     <li class="twitter"><i class="fa fa-twitter"></i><a href="#" >@CraigRGraebel</a></li>
                 </ul>
             </div><!--//contact-container-->
@@ -34,6 +41,7 @@
             <div class="interests-container container-block">
                 <h2 class="container-block-title">Interests</h2>
                 <ul class="list-unstyled interests-list">
+                    <li>IT Security</li>
                     <li>Open Source Software</li>
                     <li>Linux & Unix</li>
                     <li>Python/Django</li>
@@ -48,7 +56,10 @@
             <section class="section summary-section">
                 <h2 class="section-title"><i class="fa fa-user"></i>Career Profile</h2>
                 <div class="summary">
-                    <p>A proven leader that has developed and led highly efficient and successful technical teams.   Extensive experience and expertise in the development and execution of multi-tiered application and infrastructure systems that both raise efficiency and lower operational costs.  Excellent communication skills, work ethic and deep understanding of IT system architectures.  Ability to work with and lead the business through complex technical implementations with the goal of delivering robust and highly integrated solutions to the business.</p>
+                    <p>A proven leader that has developed and led highly efficient and successful technical teams.
+                        Extensive experience and expertise in the development and execution of multi-tiered application and infrastructure systems that both raise efficiency and lower operational costs.
+                        Excellent communication skills, work ethic and deep understanding of IT system architectures.
+                        Ability to work with and lead the business through complex technical implementations with the goal of delivering robust and highly integrated solutions to the business.</p>
                 </div><!--//summary-->
             </section><!--//section-->
 
@@ -118,7 +129,7 @@
                     <span class="project-title"><a href="#" target="_blank">Electronic Medical Record System</a></span> - <span class="project-tagline">Storage and Unix engineer - implementing an electronic medical record system for the Children's Hospital Colorado. Wrote several supporting applications, application / print drivers and implemented core supporting infrastructure </span>
                 </div><!--//item-->
                 <div class="item">
-                    <span class="project-title"><a href="#" target="_blank">Regional Data Center Move</a></span> - <span class="project-tagline">Lead storage team to migrate the entire Childrens Hospital data center to a new campus including cross site replication of 50 TB of critical patient data with minimal downtime and no data lose.</span>
+                    <span class="project-title"><a href="#" data-toggle="popover" data-placement="right" data-content='hi there' target="_blank">Regional Data Center Move</a></span> - <span class="project-tagline">Lead storage team to migrate the entire Childrens Hospital data center to a new campus including cross site replication of 50 TB of critical patient data with minimal downtime and no data lose.</span>
                 </div><!--//item-->
             </section><!--//section-->
 
